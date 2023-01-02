@@ -4,11 +4,11 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 
 export const Panel = (props) => {
   return (
-    <Container className={props.label} sx={props.style}>
+    <Container className={props.label} sx={!props.isExpanded ? props.style : {width: '90vw'}}>
       <Paper sx={{ backgroundColor: '#CCEA8D' }}>
         <Container sx={{ backgroundColor: '#A6BC09' }}>
           <label htmlFor={props.label}>{props.label.toUpperCase()}</label>
-          <Button>{true ? <ExpandMoreIcon /> : <ExpandLessIcon />}</Button>
+          <Button onClick={props.expand}>{!props.isExpanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}</Button>
         </Container>
         {props.children}
       </Paper>

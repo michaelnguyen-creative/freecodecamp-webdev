@@ -7,6 +7,8 @@ import { Panel } from './components/Panel'
 
 const App = () => {
   const [text, setText] = useState('')
+  const [editorIsExpanded, setEditorIsExpanded] = useState(false)
+  const [previewerIsExpanded, setPreviewerIsExpanded] = useState(false)
 
   useEffect(() => {
     fetch(initialTextPath)
@@ -16,7 +18,7 @@ const App = () => {
       })
   })
 
-  const handleClick = (e) => {
+  const handleInput = (e) => {
     setText(e.target.value)
   }
 
@@ -29,22 +31,36 @@ const App = () => {
   // To-do: Implement panel expansion functionality
   return (
     <Container>
-      <Panel label="editor" style={{ width: '60vw', marginBottom: 2, marginTop: 2 }}>
-        <TextField
-          multiline
-          id="editor"
-          fullWidth
-          minRows={5}
-          maxRows={10}
-          color="secondary"
-          size="small"
-          defaultValue={text}
-          onChange={handleClick}
-        ></TextField>
-      </Panel>
-      <Panel label="previewer" style={{ width: '70vw', marginBottom: 2 }}>
-        <Container sx={{ padding: 1 }}>{renderElements()}</Container>
-      </Panel>
+      <div style={{ display: previewerIsExpanded ? 'none' : '' }}>
+        <Panel
+          label="editor"
+          style={{ width: '60vw', marginBottom: 2, marginTop: 2 }}
+          expand={() => setEditorIsExpanded(!editorIsExpanded)}
+          isExpanded={editorIsExpanded}
+        >
+          <TextField
+            multiline
+            id="editor"
+            fullWidth
+            minRows={5}
+            maxRows={15}
+            color="secondary"
+            size="small"
+            defaultValue={text}
+            onChange={handleInput}
+          ></TextField>
+        </Panel>
+      </div>
+      <div style={{ display: editorIsExpanded ? 'none' : '' }}>
+        <Panel
+          label="previewer"
+          style={{ width: '70vw', marginBottom: 2 }}
+          isExpanded={previewerIsExpanded}
+          expand={() => setPreviewerIsExpanded(!previewerIsExpanded)}
+        >
+          <Container sx={{ padding: 1 }}>{renderElements()}</Container>
+        </Panel>
+      </div>
     </Container>
   )
 }

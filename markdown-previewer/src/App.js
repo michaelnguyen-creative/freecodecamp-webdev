@@ -1,7 +1,10 @@
-import { marked } from 'marked'
 import { useState, useEffect } from 'react'
-import React from 'react'
+import { marked } from 'marked'
 import initialTextPath from './initialText.md'
+import { Container, Button, TextField, Paper } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import './App.css'
 
 const App = () => {
   const [text, setText] = useState('')
@@ -22,26 +25,36 @@ const App = () => {
 
   // To-do: Implement panel expansion functionality
   return (
-    <>
-      <div>
-        <label htmlFor="editor">Editor</label>
-        <textarea
-          id="editor"
-          cols="30"
-          rows="10"
-          defaultValue={text}
-          onChange={(e) => setText(e.target.value)}
-        ></textarea>
-        <button>Expand</button>
-      </div>
-      <div>
-        <div>
-          Previewer
-          <button>Expand</button>
-        </div>
-        {renderElements()}
-      </div>
-    </>
+    <Container>
+      <Container sx={{ width: '60vw', marginBottom: 2, marginTop: 2 }}>
+        <Paper sx={{ backgroundColor: '#CCEA8D' }}>
+          <Container sx={{ backgroundColor: '#A6BC09' }}>
+            <label htmlFor="editor">Editor</label>
+            <Button>{true ? <ExpandMoreIcon /> : <ExpandLessIcon />}</Button>
+          </Container>
+          <TextField
+            multiline
+            id="editor"
+            fullWidth
+            minRows={5}
+            maxRows={10}
+            color="secondary"
+            size="small"
+            defaultValue={text}
+            onChange={(e) => setText(e.target.value)}
+          ></TextField>
+        </Paper>
+      </Container>
+      <Container sx={{ width: '70vw', marginBottom: 2 }}>
+        <Paper sx={{ backgroundColor: '#CCEA8D' }}>
+          <Container sx={{ backgroundColor: '#A6BC09' }}>
+            Previewer
+            <Button>{true ? <ExpandMoreIcon /> : <ExpandLessIcon />}</Button>
+          </Container>
+          <Container sx={{ padding: 1 }}>{renderElements()}</Container>
+        </Paper>
+      </Container>
+    </Container>
   )
 }
 

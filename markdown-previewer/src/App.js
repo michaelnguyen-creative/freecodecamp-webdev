@@ -21,6 +21,7 @@ const App = () => {
 
   const renderElements = () => {
     // console.log('text', text)
+    marked.use({ breaks: true })
     const html = marked.parse(text)
     // console.log('html', html)
     return <div id="preview" dangerouslySetInnerHTML={{ __html: html }}></div>

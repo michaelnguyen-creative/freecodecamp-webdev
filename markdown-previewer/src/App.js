@@ -28,7 +28,6 @@ const App = () => {
     return <div id="preview" dangerouslySetInnerHTML={{ __html: html }}></div>
   }
 
-  // To-do: Implement panel expansion functionality
   return (
     <Container>
       <div style={{ display: previewerIsExpanded ? 'none' : '' }}>

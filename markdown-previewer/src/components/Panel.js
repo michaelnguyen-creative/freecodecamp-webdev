@@ -8,7 +8,7 @@ export const Panel = (props) => {
       <Paper sx={{ backgroundColor: '#CCEA8D' }}>
         <Container sx={{ backgroundColor: '#A6BC09' }}>
           <label htmlFor={props.label}>{props.label.toUpperCase()}</label>
-          <Button onClick={props.expand}>{!props.isExpanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}</Button>
+          <Button onClick={props.expand}>{!props.isExpanded ? <ExpandMoreIcon data-testid="expand-more" /> : <ExpandLessIcon data-testid="expand-less" />}</Button>
         </Container>
         {props.children}
       </Paper>

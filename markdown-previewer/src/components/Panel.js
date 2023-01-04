@@ -1,10 +1,11 @@
 import { Container, Button, Paper } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import PropTypes from 'prop-types'
 
 export const Panel = (props) => {
   return (
-    <Container className={props.label} sx={!props.isExpanded ? props.style : {width: '90vw'}}>
+    <Container className={props.label} sx={!props.isExpanded ? props.style : { width: '90vw' }}>
       <Paper sx={{ backgroundColor: '#CCEA8D' }}>
         <Container sx={{ backgroundColor: '#A6BC09' }}>
           <label htmlFor={props.label}>{props.label.toUpperCase()}</label>
@@ -14,4 +15,9 @@ export const Panel = (props) => {
       </Paper>
     </Container>
   )
+}
+
+Panel.propTypes = {
+  label: PropTypes.string.isRequired,
+  expand: PropTypes.func.isRequired,
 }

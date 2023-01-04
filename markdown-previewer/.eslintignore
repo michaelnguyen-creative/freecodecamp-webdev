@@ -1,0 +1,5 @@
+node_modules
+initialText.md
+
+.gitignore
+.eslintrc.js

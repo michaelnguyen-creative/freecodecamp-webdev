@@ -1,4 +1,4 @@
-import {Panel} from './Panel'
+import { Panel } from './Panel'
 import '@testing-library/jest-dom/extend-expect'
 import { screen, render } from '@testing-library/react'
 

@@ -49,6 +49,10 @@ const pads = [
 ]
 
 const App = () => {
+
+  const handleClick = (e) => {
+    console.log('e', e.target.children.item(0).play())
+  }
   return (
     <div id="drum-machine">
       <div>
@@ -57,6 +61,7 @@ const App = () => {
             key={pad.charCode}
             className="drum-pad"
             id={pad.audio.slice(44).replace('.mp3', '')}
+            onClick={handleClick}
           >
             <audio src={pad.audio} className="clip" id={pad.key}></audio>
             {pad.key}

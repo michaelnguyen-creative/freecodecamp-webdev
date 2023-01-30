@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const pads = [
   {
@@ -49,10 +49,28 @@ const pads = [
 ]
 
 const App = () => {
+  const [nowPlaying, setNowPlaying] = useState('')
+
+  useEffect(() => {
+    document.addEventListener('keydown', (e) => {
+      if (keys.includes(e.key.toUpperCase())) {
+        const clip = document.getElementById(e.key.toUpperCase())
+        setNowPlaying(clip.id)
+        clip.play()
+        setTimeout(() => setNowPlaying(''), 1000)
+      }
+    })
+  })
+
+  const keys = pads.map(({ key }) => key)
 
   const handleClick = (e) => {
-    console.log('e', e.target.children.item(0).play())
+    const clip = e.target.children[0]
+    setNowPlaying(clip.id)
+    clip.play()
+    setTimeout(() => setNowPlaying(''), 1000)
   }
+
   return (
     <div id="drum-machine">
       <div>
@@ -63,13 +81,17 @@ const App = () => {
             id={pad.audio.slice(44).replace('.mp3', '')}
             onClick={handleClick}
           >
-            <audio src={pad.audio} className="clip" id={pad.key}></audio>
+            <audio
+              src={pad.audio}
+              className="clip"
+              id={pad.key}
+              onKeyDown={() => console.log('pressed')}
+            ></audio>
             {pad.key}
           </button>
         ))}
       </div>
-      <div id="display"></div>
-      
+      <div id="display">{nowPlaying}</div>
     </div>
   )
 }
